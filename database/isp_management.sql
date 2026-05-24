@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 24 Bulan Mei 2026 pada 01.47
+-- Waktu pembuatan: 24 Bulan Mei 2026 pada 15.09
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -41,8 +41,8 @@ CREATE TABLE `alat_mt` (
 CREATE TABLE `billing` (
   `id_billing` int(11) NOT NULL,
   `tanggal_tagihan` date NOT NULL,
-  `tanggal_bayar` date NOT NULL,
-  `status` varchar(10) NOT NULL,
+  `tanggal_bayar` date DEFAULT NULL,
+  `status` varchar(20) NOT NULL,
   `id_pelanggan` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -94,7 +94,7 @@ CREATE TABLE `modem` (
 CREATE TABLE `paket` (
   `id_paket` int(11) NOT NULL,
   `jenis_paket` varchar(16) NOT NULL,
-  `kecepatan_bandwith` int(11) NOT NULL,
+  `kecepatan_bandwidth` int(11) NOT NULL,
   `harga` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -106,7 +106,7 @@ CREATE TABLE `paket` (
 
 CREATE TABLE `pelanggan` (
   `id_pelanggan` int(11) NOT NULL,
-  `nama` varchar(16) NOT NULL,
+  `nama` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `id_modem` int(11) DEFAULT NULL,
   `id_router` int(11) DEFAULT NULL,
@@ -147,7 +147,7 @@ CREATE TABLE `router` (
 
 CREATE TABLE `teknisi` (
   `id_teknisi` int(11) NOT NULL,
-  `nama` varchar(16) NOT NULL,
+  `nama` varchar(50) NOT NULL,
   `alamat` varchar(30) NOT NULL,
   `jenis_kelamin` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
