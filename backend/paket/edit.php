@@ -1,7 +1,7 @@
 <?php
 
 // Sertakan file koneksi database
-include __DIR__ . '/../config/connect.php';
+include __DIR__. '/../config/connect.php';
 
 // Cek apakah request method adalah POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -31,6 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     header("Location: ../../templates/paket/index.php");
 }
-var_dump(isset($conn));
+
 exit;
 ?>
