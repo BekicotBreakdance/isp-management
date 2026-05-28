@@ -6,29 +6,29 @@ Sistem manajemen ISP / RT-RW Net berbasis **PHP Native** dan **MySQL** untuk men
 
 # 🚀 Features
 
-* Dashboard dinamis
-* CRUD Pelanggan
-* CRUD Paket Internet
-* CRUD Queue / Mikrotik
-* CRUD Modem
-* CRUD Router
-* CRUD Teknisi
-* CRUD Maintenance
-* CRUD Billing
-* Statistik dashboard realtime
-* Relational Database MySQL
-* UI modern berbasis Bootstrap
+- Dashboard dinamis
+- CRUD Pelanggan
+- CRUD Paket Internet
+- CRUD Queue / Mikrotik
+- CRUD Modem
+- CRUD Router
+- CRUD Teknisi
+- CRUD Maintenance
+- CRUD Billing
+- Statistik dashboard realtime
+- Relational Database MySQL
+- UI modern berbasis Bootstrap
 
 ---
 
 # 🛠️ Tech Stack
 
-* PHP Native (Procedural)
-* MySQL
-* XAMPP
-* HTML / CSS / Bootstrap
-* JavaScript
-* GitHub
+- PHP Native (Procedural)
+- MySQL
+- XAMPP
+- HTML / CSS / Bootstrap
+- JavaScript
+- GitHub
 
 ---
 
@@ -86,6 +86,15 @@ backend/config/connect.php
 
 ---
 
+## 🔑 Default Login
+
+```text id="n6j2sp"
+Username: admin
+Password: admin123
+```
+
+---
+
 # ⚙️ Installation
 
 ## 1. Clone Repository
@@ -108,14 +117,14 @@ C:/xampp/htdocs/
 
 ## 3. Import Database
 
-* Buka phpMyAdmin
-* Buat database:
+- Buka phpMyAdmin
+- Buat database:
 
 ```sql
 isp_management
 ```
 
-* Import file:
+- Import file:
 
 ```bash
 database/isp_management.sql
@@ -127,8 +136,8 @@ database/isp_management.sql
 
 Aktifkan:
 
-* Apache
-* MySQL
+- Apache
+- MySQL
 
 di XAMPP.
 
@@ -159,6 +168,7 @@ http://localhost/isp-management
 # 👨‍💻 Team
 
 Project tugas akhir semester 2
+
 - Robit Udin 202551060 UMK
 - Muhammad Angling Gading 202551143 UMK
 - Dinda Putri Nirmala 202551056 UMK
@@ -168,10 +178,10 @@ Project tugas akhir semester 2
 
 # 📌 Notes
 
-* Project dibuat untuk pembelajaran CRUD PHP Native.
-* Menggunakan relational database MySQL.
-* Fokus pada sistem management ISP sederhana.
-* Tidak menggunakan framework.
+- Project dibuat untuk pembelajaran CRUD PHP Native.
+- Menggunakan relational database MySQL.
+- Fokus pada sistem management ISP sederhana.
+- Tidak menggunakan framework.
 
 ---
 

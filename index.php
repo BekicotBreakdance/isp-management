@@ -1,4 +1,4 @@
 <?php
 
-header("Location: templates/dashboard/index.php");
+header("Location: templates/auth/login.html");
 exit;
