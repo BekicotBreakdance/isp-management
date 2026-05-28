@@ -72,21 +72,17 @@ isp-management/
 
 ## 🔐 Database Connection
 
-File koneksi database asli tidak di-upload ke GitHub karena masuk `.gitignore`.
+Rename file berikut:
 
-Silakan copy file berikut:
-
-```bash
+```bash id="f4yb6n"
 backend/config/connect.example.php
 ```
 
-rename menjadi:
+menjadi:
 
-```bash
+```bash id="x5qu1p"
 backend/config/connect.php
 ```
-
-Lalu sesuaikan konfigurasi database lokal masing-masing.
 
 ---
 
