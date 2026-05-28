@@ -22,15 +22,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($hasil) {
         // Redirect ke halaman daftar pelanggan jika berhasil
-        header("Location: ../../templates/pelannggan/index.php?pesan=tambah_berhasil");
+        header("Location: ../../templates/pelanggan/index.php?pesan=tambah_berhasil");
     } else {
         // Redirect dengan pesan error jika gagal
-        header("Location: ../../templates/pelannggan/index.php?pesan=tambah_gagal");
+        header("Location: ../../templates/pelanggan/index.php?pesan=tambah_gagal");
     }
 
 } else {
     // Jika bukan POST, redirect ke halaman pelanggan
-    header("Location: ../../templates/pelannggan/index.php");
+    header("Location: ../../templates/pelanggan/index.php");
 }
 
 exit;

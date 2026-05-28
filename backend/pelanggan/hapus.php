@@ -16,15 +16,15 @@ if (isset($_GET['id'])) {
 
     if ($hasil) {
         // Redirect ke halaman daftar pelanggan jika berhasil
-        header("Location: ../../templates/pelannggan/index.php?pesan=hapus_berhasil");
+        header("Location: ../../templates/pelanggan/index.php?pesan=hapus_berhasil");
     } else {
         // Redirect dengan pesan error jika gagal
-        header("Location: ../../templates/pelannggan/index.php?pesan=hapus_gagal");
+        header("Location: ../../templates/pelanggan/index.php?pesan=hapus_gagal");
     }
 
 } else {
     // Jika tidak ada id, redirect ke halaman pelanggan
-    header("Location: ../../templates/pelannggan/index.php");
+    header("Location: ../../templates/pelanggan/index.php");
 }
 
 exit;

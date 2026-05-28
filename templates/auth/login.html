@@ -16,15 +16,18 @@
 <body>
     <div class="card">
         <h1>Login ISP Admin</h1>
-        <form>
-            <label>Email</label>
-            <input type="email" placeholder="admin@isp.com" />
+        <form method="POST" action="../../backend/auth/login.php">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="admin" required />
 
             <label>Password</label>
-            <input type="password" placeholder="••••••••" />
+            <input type="password" name="password" placeholder="••••••••" required />
 
             <button type="submit">Masuk</button>
         </form>
+        <?php if (isset($_GET['pesan']) && $_GET['pesan'] === 'invalid'): ?>
+            <div style="margin-top:12px;color:#dc2626;font-weight:600">Login gagal: username/password salah.</div>
+        <?php endif; ?>
     </div>
 </body>
 </html>
