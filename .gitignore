@@ -1,13 +1,9 @@
 # .gitignore — ISP Management System
-
-# Koneksi database (kalau nanti ada password)
 backend/config/connect.php
 
-# Sampah Windows
 Thumbs.db
 Desktop.ini
 
-# Sampah editor
 .vscode/
 .idea/
 *.code-workspace
