@@ -1,5 +1,14 @@
+<<<<<<< HEAD
 backend/config/connect.php
 
+=======
+# .gitignore — ISP Management System
+backend/config/connect.php
+
+Thumbs.db
+Desktop.ini
+
+>>>>>>> 02f5c399d9b67da82305ea6c83230dd2d024f577
 .vscode/
 .idea/
 Thumbs.db

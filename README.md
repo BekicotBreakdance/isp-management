@@ -70,6 +70,22 @@ isp-management/
 
 ---
 
+## 🔐 Database Connection
+
+Rename file berikut:
+
+```bash id="f4yb6n"
+backend/config/connect.example.php
+```
+
+menjadi:
+
+```bash id="x5qu1p"
+backend/config/connect.php
+```
+
+---
+
 # ⚙️ Installation
 
 ## 1. Clone Repository
