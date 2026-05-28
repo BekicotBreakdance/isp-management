@@ -107,28 +107,7 @@ database/isp_management.sql
 
 ---
 
-## 4. Setup Database Connection
-
-Edit file:
-
-```bash
-backend/config/connect.php
-```
-
-Sesuaikan:
-
-```php
-$conn = mysqli_connect(
-    "localhost",
-    "root",
-    "",
-    "isp_management"
-);
-```
-
----
-
-## 5. Run Project
+## 4. Run Project
 
 Aktifkan:
 
