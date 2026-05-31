@@ -13,6 +13,7 @@ $notif  = [
     'edit_gagal'      => ['teks' => '❌ Gagal memperbarui teknisi.',    'class' => 'notif-error'],
     'hapus_berhasil'  => ['teks' => '✅ Teknisi berhasil dihapus!',    'class' => 'notif-success'],
     'hapus_gagal'     => ['teks' => '❌ Gagal menghapus teknisi.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => '⚠️ Teknisi tidak bisa dihapus karena masih memiliki riwayat maintenance.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

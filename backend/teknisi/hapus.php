@@ -1,28 +1,33 @@
 <?php
+/**
+ * backend/teknisi/hapus.php
+ * Menghapus data teknisi.
+ * Validasi: teknisi tidak bisa dihapus jika masih punya riwayat maintenance.
+ */
 
-// Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
-// Ambil id dari URL (GET parameter)
-if (isset($_GET['id'])) {
+$id = (int)($_GET['id'] ?? 0);
 
-    $id_teknisi = (int)$_GET['id'];
+if ($id > 0) {
 
-    // Buat query DELETE
-    $query = "DELETE FROM teknisi WHERE id_teknisi = $id_teknisi";
+    // Cek apakah teknisi masih punya riwayat maintenance
+    $cek = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FROM maintenance WHERE id_teknisi = $id"))['c'];
 
-    // Jalankan query
-    $hasil = mysqli_query($conn, $query);
-
-    if ($hasil) {
-        header("Location: ../../templates/teknisi/index.php?pesan=hapus_berhasil");
-    } else {
-        header("Location: ../../templates/teknisi/index.php?pesan=hapus_gagal");
+    if ($cek > 0) {
+        header("Location: ../../templates/teknisi/index.php?pesan=hapus_gagal_relasi");
+        exit;
     }
+
+    $hasil = mysqli_query($conn, "DELETE FROM teknisi WHERE id_teknisi = $id");
+    header($hasil
+        ? "Location: ../../templates/teknisi/index.php?pesan=hapus_berhasil"
+        : "Location: ../../templates/teknisi/index.php?pesan=hapus_gagal"
+    );
 
 } else {
     header("Location: ../../templates/teknisi/index.php");
 }
-
 exit;
-?>

@@ -1,28 +1,22 @@
 <?php
+/**
+ * backend/queue/hapus.php
+ * Menghapus data queue / Mikrotik.
+ */
 
-// Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
-// Ambil id dari URL (GET parameter)
-if (isset($_GET['id'])) {
+$id = (int)($_GET['id'] ?? 0);
 
-    $id_queue = (int)$_GET['id'];
-
-    // Buat query DELETE
-    $query = "DELETE FROM queue WHERE id_queue = $id_queue";
-
-    // Jalankan query
-    $hasil = mysqli_query($conn, $query);
-
-    if ($hasil) {
-        header("Location: ../../templates/queue/index.php?pesan=hapus_berhasil");
-    } else {
-        header("Location: ../../templates/queue/index.php?pesan=hapus_gagal");
-    }
-
+if ($id > 0) {
+    $hasil = mysqli_query($conn, "DELETE FROM queue WHERE id_queue = $id");
+    header($hasil
+        ? "Location: ../../templates/queue/index.php?pesan=hapus_berhasil"
+        : "Location: ../../templates/queue/index.php?pesan=hapus_gagal"
+    );
 } else {
     header("Location: ../../templates/queue/index.php");
 }
-
 exit;
-?>

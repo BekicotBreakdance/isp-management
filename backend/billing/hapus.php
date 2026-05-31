@@ -1,28 +1,22 @@
 <?php
+/**
+ * backend/billing/hapus.php
+ * Menghapus data tagihan billing.
+ */
 
-// Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
-// Ambil id dari URL (GET parameter)
-if (isset($_GET['id'])) {
+$id = (int)($_GET['id'] ?? 0);
 
-    $id_billing = (int)$_GET['id'];
-
-    // Buat query DELETE
-    $query = "DELETE FROM billing WHERE id_billing = $id_billing";
-
-    // Jalankan query
-    $hasil = mysqli_query($conn, $query);
-
-    if ($hasil) {
-        header("Location: ../../templates/billing/index.php?pesan=hapus_berhasil");
-    } else {
-        header("Location: ../../templates/billing/index.php?pesan=hapus_gagal");
-    }
-
+if ($id > 0) {
+    $hasil = mysqli_query($conn, "DELETE FROM billing WHERE id_billing = $id");
+    header($hasil
+        ? "Location: ../../templates/billing/index.php?pesan=hapus_berhasil"
+        : "Location: ../../templates/billing/index.php?pesan=hapus_gagal"
+    );
 } else {
     header("Location: ../../templates/billing/index.php");
 }
-
 exit;
-?>

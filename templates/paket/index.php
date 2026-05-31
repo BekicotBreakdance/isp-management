@@ -14,6 +14,7 @@ $notif = [
     'edit_gagal'      => ['teks' => '❌ Gagal memperbarui paket.',    'class' => 'notif-error'],
     'hapus_berhasil'  => ['teks' => '✅ Paket berhasil dihapus!',    'class' => 'notif-success'],
     'hapus_gagal'     => ['teks' => '❌ Gagal menghapus paket.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => '⚠️ Paket tidak bisa dihapus karena masih digunakan oleh pelanggan aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

@@ -1,28 +1,33 @@
 <?php
+/**
+ * backend/paket/hapus.php
+ * Menghapus data paket internet.
+ * Validasi: paket tidak bisa dihapus jika masih dipakai pelanggan.
+ */
 
-// Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
-// Ambil id dari URL (GET parameter)
-if (isset($_GET['id'])) {
+$id = (int)($_GET['id'] ?? 0);
 
-    $id_paket = (int)$_GET['id'];
+if ($id > 0) {
 
-    // Buat query DELETE
-    $query = "DELETE FROM paket WHERE id_paket = $id_paket";
+    // Cek apakah paket masih dipakai pelanggan
+    $cek = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FROM pelanggan WHERE id_paket = $id"))['c'];
 
-    // Jalankan query
-    $hasil = mysqli_query($conn, $query);
-
-    if ($hasil) {
-        header("Location: ../../templates/paket/index.php?pesan=hapus_berhasil");
-    } else {
-        header("Location: ../../templates/paket/index.php?pesan=hapus_gagal");
+    if ($cek > 0) {
+        header("Location: ../../templates/paket/index.php?pesan=hapus_gagal_relasi");
+        exit;
     }
+
+    $hasil = mysqli_query($conn, "DELETE FROM paket WHERE id_paket = $id");
+    header($hasil
+        ? "Location: ../../templates/paket/index.php?pesan=hapus_berhasil"
+        : "Location: ../../templates/paket/index.php?pesan=hapus_gagal"
+    );
 
 } else {
     header("Location: ../../templates/paket/index.php");
 }
-
 exit;
-?>

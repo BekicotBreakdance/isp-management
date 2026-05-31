@@ -14,6 +14,7 @@ $notif = [
     'edit_gagal'      => ['teks' => '❌ Gagal memperbarui router.',    'class' => 'notif-error'],
     'hapus_berhasil'  => ['teks' => '✅ Router berhasil dihapus!',    'class' => 'notif-success'],
     'hapus_gagal'     => ['teks' => '❌ Gagal menghapus router.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => '⚠️ Router tidak bisa dihapus karena masih terpasang pada pelanggan aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

@@ -14,6 +14,7 @@ $notif = [
     'edit_gagal'      => ['teks' => '❌ Gagal memperbarui modem.',    'class' => 'notif-error'],
     'hapus_berhasil'  => ['teks' => '✅ Modem berhasil dihapus!',    'class' => 'notif-success'],
     'hapus_gagal'     => ['teks' => '❌ Gagal menghapus modem.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => '⚠️ Modem tidak bisa dihapus karena masih terpasang pada pelanggan aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

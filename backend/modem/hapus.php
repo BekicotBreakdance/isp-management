@@ -1,28 +1,33 @@
 <?php
+/**
+ * backend/modem/hapus.php
+ * Menghapus data modem.
+ * Validasi: modem tidak bisa dihapus jika masih dipasang di pelanggan.
+ */
 
-// Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
-// Ambil id dari URL (GET parameter)
-if (isset($_GET['id'])) {
+$id = (int)($_GET['id'] ?? 0);
 
-    $id_modem = (int)$_GET['id'];
+if ($id > 0) {
 
-    // Buat query DELETE
-    $query = "DELETE FROM modem WHERE id_modem = $id_modem";
+    // Cek apakah modem masih digunakan pelanggan
+    $cek = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FROM pelanggan WHERE id_modem = $id"))['c'];
 
-    // Jalankan query
-    $hasil = mysqli_query($conn, $query);
-
-    if ($hasil) {
-        header("Location: ../../templates/modem/index.php?pesan=hapus_berhasil");
-    } else {
-        header("Location: ../../templates/modem/index.php?pesan=hapus_gagal");
+    if ($cek > 0) {
+        header("Location: ../../templates/modem/index.php?pesan=hapus_gagal_relasi");
+        exit;
     }
+
+    $hasil = mysqli_query($conn, "DELETE FROM modem WHERE id_modem = $id");
+    header($hasil
+        ? "Location: ../../templates/modem/index.php?pesan=hapus_berhasil"
+        : "Location: ../../templates/modem/index.php?pesan=hapus_gagal"
+    );
 
 } else {
     header("Location: ../../templates/modem/index.php");
 }
-
 exit;
-?>

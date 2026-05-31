@@ -1,28 +1,29 @@
 <?php
+/**
+ * backend/maintenance/hapus.php
+ * Menghapus data maintenance.
+ * Cascade: hapus dulu semua detail_alat_mt terkait, baru hapus maintenance.
+ */
 
-// Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
-// Ambil id dari URL (GET parameter)
-if (isset($_GET['id'])) {
+$id = (int)($_GET['id'] ?? 0);
 
-    $id_mt = (int)$_GET['id'];
+if ($id > 0) {
 
-    // Buat query DELETE
-    $query = "DELETE FROM maintenance WHERE id_mt = $id_mt";
+    // Hapus dulu semua detail alat yang terkait maintenance ini (cascade manual)
+    mysqli_query($conn, "DELETE FROM detail_alat_mt WHERE id_mt = $id");
 
-    // Jalankan query
-    $hasil = mysqli_query($conn, $query);
-
-    if ($hasil) {
-        header("Location: ../../templates/maintenance/index.php?pesan=hapus_berhasil");
-    } else {
-        header("Location: ../../templates/maintenance/index.php?pesan=hapus_gagal");
-    }
+    // Baru hapus maintenance-nya
+    $hasil = mysqli_query($conn, "DELETE FROM maintenance WHERE id_mt = $id");
+    header($hasil
+        ? "Location: ../../templates/maintenance/index.php?pesan=hapus_berhasil"
+        : "Location: ../../templates/maintenance/index.php?pesan=hapus_gagal"
+    );
 
 } else {
     header("Location: ../../templates/maintenance/index.php");
 }
-
 exit;
-?>
