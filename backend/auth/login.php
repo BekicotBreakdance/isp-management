@@ -40,9 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
     // failed
-    header('Location: /isp-management/templates/auth/login.html?pesan=invalid');
+    header('Location: /isp-management/templates/auth/login.php?pesan=invalid');
     exit;
 } else {
-    header('Location: /isp-management/templates/auth/login.html');
+    header('Location: /isp-management/templates/auth/login.php');
     exit;
 }

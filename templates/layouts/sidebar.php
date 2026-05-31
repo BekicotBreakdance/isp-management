@@ -1,6 +1,5 @@
 <?php
 // Sidebar — include di setiap halaman
-// Deteksi halaman aktif berdasarkan URL
 $current = $_SERVER['REQUEST_URI'];
 
 function nav_active(string $path): string {
@@ -23,48 +22,73 @@ function nav_active(string $path): string {
     <p class="sidebar-section-label">Menu Utama</p>
     <ul class="sidebar-nav">
         <li>
-            <a href="/isp-management/templates/dashboard/index.php" class="<?= nav_active('dashboard') ?>">
+            <a href="/isp-management/templates/dashboard/index.php"
+               class="<?= nav_active('dashboard') ?>">
                 <span class="nav-icon">🏠</span> Dashboard
             </a>
         </li>
         <li>
-            <a href="/isp-management/templates/pelanggan/index.php" class="<?= nav_active('pelanggan') ?>">
+            <a href="/isp-management/templates/pelanggan/index.php"
+               class="<?= nav_active('pelanggan') ?>">
                 <span class="nav-icon">👤</span> Pelanggan
             </a>
         </li>
         <li>
-            <a href="/isp-management/templates/paket/index.php" class="<?= nav_active('paket') ?>">
+            <a href="/isp-management/templates/paket/index.php"
+               class="<?= nav_active('paket') ?>">
                 <span class="nav-icon">📶</span> Paket Internet
             </a>
         </li>
         <li>
-            <a href="/isp-management/templates/queue/index.php" class="<?= nav_active('queue') ?>">
+            <a href="/isp-management/templates/queue/index.php"
+               class="<?= nav_active('queue') ?>">
                 <span class="nav-icon">🔀</span> Queue / Mikrotik
             </a>
         </li>
         <li>
-            <a href="/isp-management/templates/modem/index.php" class="<?= nav_active('modem') ?>">
-                <span class="nav-icon">📦</span> Modem
-            </a>
-        </li>
-        <li>
-            <a href="/isp-management/templates/teknisi/index.php" class="<?= nav_active('teknisi') ?>">
-                <span class="nav-icon">🔧</span> Teknisi
+            <a href="/isp-management/templates/billing/index.php"
+               class="<?= nav_active('billing') ?>">
+                <span class="nav-icon">💳</span> Billing
             </a>
         </li>
     </ul>
 
-    <!-- Nav Lanjutan -->
-    <p class="sidebar-section-label">Lainnya</p>
+    <!-- Nav Inventaris -->
+    <p class="sidebar-section-label">Inventaris</p>
     <ul class="sidebar-nav">
         <li>
-            <a href="/isp-management/templates/maintenance/index.php" class="<?= nav_active('maintenance') ?>">
+            <a href="/isp-management/templates/modem/index.php"
+               class="<?= nav_active('modem') ?>">
+                <span class="nav-icon">📦</span> Modem
+            </a>
+        </li>
+        <li>
+            <a href="/isp-management/templates/router/index.php"
+               class="<?= nav_active('router') ?>">
+                <span class="nav-icon">🌐</span> Router
+            </a>
+        </li>
+    </ul>
+
+    <!-- Nav SDM -->
+    <p class="sidebar-section-label">SDM & Operasional</p>
+    <ul class="sidebar-nav">
+        <li>
+            <a href="/isp-management/templates/teknisi/index.php"
+               class="<?= nav_active('teknisi') ?>">
+                <span class="nav-icon">🔧</span> Teknisi
+            </a>
+        </li>
+        <li>
+            <a href="/isp-management/templates/maintenance/index.php"
+               class="<?= nav_active('maintenance') ?>">
                 <span class="nav-icon">🛠️</span> Maintenance
             </a>
         </li>
         <li>
-            <a href="/isp-management/templates/billing/index.php" class="<?= nav_active('billing') ?>">
-                <span class="nav-icon">💳</span> Billing
+            <a href="/isp-management/templates/alat_mt/index.php"
+               class="<?= nav_active('alat_mt') ?>">
+                <span class="nav-icon">🪛</span> Alat Maintenance
             </a>
         </li>
     </ul>

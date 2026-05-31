@@ -65,6 +65,8 @@ $notif = [
                     </td>
                     <td>
                         <div style="display:flex;gap:6px">
+                            <a href="detail.php?id=<?= $row['id_mt'] ?>" class="btn-action" title="Detail Alat"
+                               style="background:#eff6ff;color:var(--blue-mid)">🔍</a>
                             <a href="edit.php?id=<?= $row['id_mt'] ?>" class="btn-action btn-edit" title="Edit">✏️</a>
                             <a href="../../backend/maintenance/hapus.php?id=<?= $row['id_mt'] ?>"
                                class="btn-action btn-hapus" title="Hapus"

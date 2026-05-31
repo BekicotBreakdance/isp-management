@@ -4,7 +4,7 @@ session_start();
 
 // Redirect ke login kalau belum login
 if (!isset($_SESSION['user'])) {
-    header('Location: /isp-management/templates/auth/login.html');
+    header('Location: /isp-management/templates/auth/login.php');
     exit;
 }
 ?>

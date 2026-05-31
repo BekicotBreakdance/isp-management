@@ -1,49 +1,53 @@
-# 🌐 ISP Management System
+# ISP Management System
 
-Sistem manajemen ISP / RT-RW Net berbasis **PHP Native** dan **MySQL** untuk mengelola pelanggan internet, billing, maintenance, queue Mikrotik, teknisi, modem, dan router.
-
----
-
-# 🚀 Features
-
-- Dashboard dinamis
-- CRUD Pelanggan
-- CRUD Paket Internet
-- CRUD Queue / Mikrotik
-- CRUD Modem
-- CRUD Router
-- CRUD Teknisi
-- CRUD Maintenance
-- CRUD Billing
-- Statistik dashboard realtime
-- Relational Database MySQL
-- UI modern berbasis Bootstrap
+> Sistem manajemen jaringan internet berbasis web untuk operator ISP lokal dan RT/RW Net. Dibangun menggunakan **PHP Native** dan **MySQL** dengan tampilan modern berbasis Bootstrap.
 
 ---
 
-# 🛠️ Tech Stack
+## Fitur Utama
 
-- PHP Native (Procedural)
-- MySQL
-- XAMPP
-- HTML / CSS / Bootstrap
-- JavaScript
-- GitHub
+| Modul | Deskripsi |
+|---|---|
+| 🏠 **Dashboard** | Statistik real-time: total pelanggan, paket, router, estimasi tagihan |
+| 👤 **Pelanggan** | CRUD data pelanggan + relasi ke paket, modem, router |
+| 📶 **Paket Internet** | Kelola paket layanan internet (kecepatan & harga) |
+| 🔀 **Queue / Mikrotik** | Manajemen IP address dan username Mikrotik |
+| 💳 **Billing** | Tagihan bulanan pelanggan + filter status pembayaran |
+| 🔧 **Teknisi** | Data teknisi lapangan |
+| 🛠️ **Maintenance** | Catatan kendala lapangan + alat yang digunakan |
+| 🪛 **Alat Maintenance** | Inventaris alat teknis |
+| 📦 **Modem** | Data inventaris modem |
+| 🌐 **Router** | Data inventaris router |
+| 🔔 **Notifikasi** | Badge tagihan belum lunas real-time di navbar |
+| 🔍 **Pencarian** | Search pelanggan (nama/alamat), billing (nama + status) |
 
 ---
 
-# 📂 Project Structure
+## Tech Stack
 
-```bash
+| Layer | Teknologi |
+|---|---|
+| Backend | PHP Native Procedural |
+| Database | MySQL via XAMPP |
+| Frontend | HTML5, CSS3 (Custom), Bootstrap 5.3 |
+| Font | Google Fonts — Inter |
+| Version Control | Git + GitHub |
+
+---
+
+## Struktur Project
+
+```
 isp-management/
 │
 ├── assets/
-│   ├── css/
-│   └── js/
+│   └── css/
+│       └── style.css          ← Theme utama (CSS Variables)
 │
 ├── backend/
 │   ├── config/
-│   │   └── connect.php
+│   │   └── connect.php        ← Koneksi DB (di-gitignore)
+│   ├── auth/
 │   ├── pelanggan/
 │   ├── paket/
 │   ├── queue/
@@ -51,9 +55,17 @@ isp-management/
 │   ├── router/
 │   ├── teknisi/
 │   ├── maintenance/
-│   └── billing/
+│   ├── billing/
+│   ├── alat_mt/
+│   └── detail_alat_mt/
 │
 ├── templates/
+│   ├── layouts/
+│   │   ├── header.php         ← Session check + asset loading
+│   │   ├── sidebar.php        ← Navigasi utama
+│   │   └── navbar.php         ← Topbar + notifikasi dinamis
+│   ├── auth/
+│   │   └── login.php
 │   ├── dashboard/
 │   ├── pelanggan/
 │   ├── paket/
@@ -62,129 +74,110 @@ isp-management/
 │   ├── router/
 │   ├── teknisi/
 │   ├── maintenance/
-│   └── billing/
+│   ├── billing/
+│   └── alat_mt/
 │
-└── database/
-    └── isp_management.sql
+├── database/
+│   └── isp_management.sql     ← Schema + data awal
+│
+├── .gitignore
+└── index.php                  ← Entry point → redirect ke login
 ```
 
 ---
 
-## 🔐 Database Connection
+## Instalasi
 
-Rename file berikut:
-
-```bash id="f4yb6n"
-backend/config/connect.example.php
-```
-
-menjadi:
-
-```bash id="x5qu1p"
-backend/config/connect.php
-```
-
----
-
-## 🔑 Default Login
-
-```text id="n6j2sp"
-Username: admin
-Password: admin123
-```
-
----
-
-# ⚙️ Installation
-
-## 1. Clone Repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/BekicotBreakdance/isp-management.git
 ```
 
----
+### 2. Pindahkan ke XAMPP
 
-## 2. Move Project
-
-Pindahkan folder project ke:
-
-```bash
-C:/xampp/htdocs/
+```
+C:/xampp/htdocs/isp-management/
 ```
 
----
+### 3. Buat Koneksi Database
 
-## 3. Import Database
+Buat file `backend/config/connect.php`:
 
-- Buka phpMyAdmin
-- Buat database:
-
-```sql
-isp_management
+```php
+<?php
+$host   = 'localhost';
+$user   = 'root';
+$pass   = '';          // sesuaikan
+$db     = 'isp_management';
+$conn   = mysqli_connect($host, $user, $pass, $db);
+if (!$conn) die("Koneksi gagal: " . mysqli_connect_error());
 ```
 
-- Import file:
+### 4. Import Database
 
-```bash
-database/isp_management.sql
+- Buka **phpMyAdmin** → `http://localhost/phpmyadmin`
+- Buat database: `isp_management`
+- Import: `database/isp_management.sql`
+
+### 5. Jalankan
+
+Aktifkan **Apache** dan **MySQL** di XAMPP, lalu buka:
+
 ```
-
----
-
-## 4. Run Project
-
-Aktifkan:
-
-- Apache
-- MySQL
-
-di XAMPP.
-
-Buka browser:
-
-```bash
 http://localhost/isp-management
 ```
 
 ---
 
-# 📊 Main Modules
+## Login Default
 
-| Module      | Description             |
-| ----------- | ----------------------- |
-| Dashboard   | Statistik & monitoring  |
-| Pelanggan   | Data pelanggan internet |
-| Paket       | Paket internet          |
-| Queue       | Queue / Mikrotik        |
-| Billing     | Tagihan pelanggan       |
-| Maintenance | Maintenance & kendala   |
-| Teknisi     | Data teknisi            |
-| Modem       | Data modem              |
-| Router      | Data router             |
+```
+Username : admin
+Password : admin123
+```
+
+> Password di-hash menggunakan `password_hash()` PHP. Dapat diubah langsung di tabel `users` via phpMyAdmin.
 
 ---
 
-# 👨‍💻 Team
+## Relasi Database
 
-Project tugas akhir semester 2
+```
+pelanggan ──┬── paket
+            ├── modem
+            └── router
 
-- Robit Udin 202551060 UMK
-- Muhammad Angling Gading 202551143 UMK
-- Dinda Putri Nirmala 202551056 UMK
-- Zulfa Khoirun Nada 202551002 UMK
+billing ────── pelanggan
 
----
+queue ─────── pelanggan
 
-# 📌 Notes
-
-- Project dibuat untuk pembelajaran CRUD PHP Native.
-- Menggunakan relational database MySQL.
-- Fokus pada sistem management ISP sederhana.
-- Tidak menggunakan framework.
+maintenance ─┬── pelanggan
+             ├── teknisi
+             └── detail_alat_mt ── alat_mt
+```
 
 ---
 
-# 🗿 Status
+## Tim Pengembang
 
-🚧 On Development
+**Tugas Akhir Semester 2 — Universitas Muria Kudus (UMK)**
+
+| Nama | NIM |
+|---|---|
+| Robit Udin | 202551060 |
+| Muhammad Angling Gading | 202551143 |
+| Dinda Putri Nirmala | 202551056 |
+| Zulfa Khoirun Nada | 202551002 |
+
+---
+
+## Catatan
+
+- Project ini dibuat untuk keperluan pembelajaran CRUD PHP Native semester 2.
+- Tidak menggunakan framework, REST API, atau OOP kompleks.
+- Fokus pada keterbacaan kode dan prinsip dasar pemrograman web.
+
+---
+
+**Status:** ✅ Selesai — Siap Presentasi

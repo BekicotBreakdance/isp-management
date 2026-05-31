@@ -4,6 +4,21 @@ include __DIR__ . '/../layouts/header.php';
 include __DIR__ . '/../layouts/sidebar.php';
 include __DIR__ . '/../layouts/navbar.php';
 
+// Search / filter
+$cari   = trim($_GET['cari'] ?? '');
+$status = trim($_GET['status'] ?? '');
+
+$conditions = [];
+if ($cari !== '') {
+    $cari_esc      = mysqli_real_escape_string($conn, $cari);
+    $conditions[]  = "p.nama LIKE '%$cari_esc%'";
+}
+if ($status !== '') {
+    $status_esc    = mysqli_real_escape_string($conn, $status);
+    $conditions[]  = "b.status = '$status_esc'";
+}
+$where = $conditions ? 'WHERE ' . implode(' AND ', $conditions) : '';
+
 $result = mysqli_query($conn, "
     SELECT b.id_billing, b.tanggal_tagihan, b.tanggal_bayar, b.status,
            p.nama AS nama_pelanggan,
@@ -11,6 +26,7 @@ $result = mysqli_query($conn, "
     FROM billing b
     LEFT JOIN pelanggan p  ON b.id_pelanggan = p.id_pelanggan
     LEFT JOIN paket     pk ON p.id_paket     = pk.id_paket
+    $where
     ORDER BY b.tanggal_tagihan DESC
 ");
 
@@ -40,7 +56,26 @@ $notif = [
     <?php endif; ?>
 
     <div class="panel">
-        <div class="panel-header"><div class="panel-title">Daftar Tagihan</div></div>
+        <div class="panel-header">
+            <div class="panel-title">Daftar Tagihan</div>
+            <!-- Search + filter form -->
+            <form method="GET" action="" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                <input type="text" name="cari" value="<?= htmlspecialchars($cari) ?>"
+                       placeholder="Cari nama pelanggan..."
+                       style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:13px;outline:none;width:200px">
+                <select name="status"
+                        style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:13px;outline:none">
+                    <option value="">Semua Status</option>
+                    <option value="Belum Lunas" <?= $status === 'Belum Lunas' ? 'selected' : '' ?>>Belum Lunas</option>
+                    <option value="Lunas"       <?= $status === 'Lunas'       ? 'selected' : '' ?>>Lunas</option>
+                </select>
+                <button type="submit" class="btn-primary-sm" style="padding:7px 14px">🔍 Cari</button>
+                <?php if ($cari !== '' || $status !== ''): ?>
+                    <a href="index.php" class="btn-cancel" style="padding:7px 12px;font-size:12px">✕ Reset</a>
+                <?php endif; ?>
+            </form>
+        </div>
+
         <table class="dash-table">
             <thead>
                 <tr>
@@ -70,18 +105,19 @@ $notif = [
                     </td>
                     <td style="font-size:12px"><?= htmlspecialchars($row['tanggal_tagihan']) ?></td>
                     <td style="font-size:12px;color:var(--gray-400)">
-                        <?= $row['tanggal_bayar'] ? htmlspecialchars($row['tanggal_bayar']) : '<span style="color:var(--red)">Belum</span>' ?>
+                        <?= $row['tanggal_bayar']
+                            ? htmlspecialchars($row['tanggal_bayar'])
+                            : '<span style="color:var(--red)">Belum</span>' ?>
                     </td>
                     <td>
                         <?php
-                        $status = $row['status'];
-                        $badge  = match(strtolower($status)) {
-                            'lunas'         => 'badge-green',
-                            'belum lunas'   => 'badge-red',
-                            default         => 'badge-yellow',
+                        $badge = match(strtolower($row['status'])) {
+                            'lunas'       => 'badge-green',
+                            'belum lunas' => 'badge-red',
+                            default       => 'badge-yellow',
                         };
                         ?>
-                        <span class="badge <?= $badge ?>"><?= htmlspecialchars($status) ?></span>
+                        <span class="badge <?= $badge ?>"><?= htmlspecialchars($row['status']) ?></span>
                     </td>
                     <td>
                         <div style="display:flex;gap:6px">
@@ -94,7 +130,7 @@ $notif = [
                 </tr>
                 <?php endwhile; ?>
             <?php else: ?>
-                <tr><td colspan="8" class="empty-state">Belum ada data billing.</td></tr>
+                <tr><td colspan="8" class="empty-state">Tidak ada data billing yang ditemukan.</td></tr>
             <?php endif; ?>
             </tbody>
         </table>

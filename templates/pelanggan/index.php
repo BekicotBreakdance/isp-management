@@ -4,6 +4,14 @@ include __DIR__ . '/../layouts/header.php';
 include __DIR__ . '/../layouts/sidebar.php';
 include __DIR__ . '/../layouts/navbar.php';
 
+// Search / filter
+$cari     = trim($_GET['cari'] ?? '');
+$where    = '';
+if ($cari !== '') {
+    $cari_esc = mysqli_real_escape_string($conn, $cari);
+    $where    = "WHERE p.nama LIKE '%$cari_esc%' OR p.alamat LIKE '%$cari_esc%'";
+}
+
 $result = mysqli_query($conn, "
     SELECT p.*, pk.jenis_paket, pk.kecepatan_bandwidth,
            m.merk AS merk_modem, r.merk AS merk_router
@@ -11,6 +19,7 @@ $result = mysqli_query($conn, "
     LEFT JOIN paket  pk ON p.id_paket  = pk.id_paket
     LEFT JOIN modem  m  ON p.id_modem  = m.id_modem
     LEFT JOIN router r  ON p.id_router = r.id_router
+    $where
     ORDER BY p.id_pelanggan ASC
 ");
 
@@ -40,7 +49,27 @@ $notif = [
     <?php endif; ?>
 
     <div class="panel">
-        <div class="panel-header"><div class="panel-title">Daftar Pelanggan</div></div>
+        <div class="panel-header">
+            <div class="panel-title">Daftar Pelanggan
+                <?php if ($cari !== ''): ?>
+                    <span style="font-size:12px;font-weight:400;color:var(--gray-400)">
+                        — hasil pencarian "<strong><?= htmlspecialchars($cari) ?></strong>"
+                        (<?= mysqli_num_rows($result) ?> data)
+                    </span>
+                <?php endif; ?>
+            </div>
+            <!-- Search form -->
+            <form method="GET" action="" style="display:flex;gap:8px;align-items:center">
+                <input type="text" name="cari" value="<?= htmlspecialchars($cari) ?>"
+                       placeholder="Cari nama / alamat..."
+                       style="padding:7px 12px;border:1.5px solid var(--gray-200);border-radius:7px;font-size:13px;outline:none;width:220px">
+                <button type="submit" class="btn-primary-sm" style="padding:7px 14px">🔍 Cari</button>
+                <?php if ($cari !== ''): ?>
+                    <a href="index.php" class="btn-cancel" style="padding:7px 12px;font-size:12px">✕ Reset</a>
+                <?php endif; ?>
+            </form>
+        </div>
+
         <table class="dash-table">
             <thead>
                 <tr>
@@ -81,7 +110,9 @@ $notif = [
                 </tr>
                 <?php endwhile; ?>
             <?php else: ?>
-                <tr><td colspan="7" class="empty-state">Belum ada data pelanggan.</td></tr>
+                <tr><td colspan="7" class="empty-state">
+                    <?= $cari !== '' ? 'Tidak ada pelanggan dengan kata kunci "' . htmlspecialchars($cari) . '".' : 'Belum ada data pelanggan.' ?>
+                </td></tr>
             <?php endif; ?>
             </tbody>
         </table>

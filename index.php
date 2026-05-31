@@ -1,4 +1,4 @@
 <?php
 
-header("Location: templates/auth/login.html");
+header("Location: templates/auth/login.php");
 exit;
