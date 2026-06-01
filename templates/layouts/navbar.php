@@ -14,11 +14,14 @@ if (isset($conn)) {
 ?>
 <nav class="navbar-top">
 
-    <!-- Search global (dekoratif, bisa diarahkan ke modul) -->
-    <div class="navbar-search">
+    <!-- Search global — mengarah ke halaman hasil pencarian -->
+    <form class="navbar-search" method="GET" action="/isp-management/templates/search.php">
         <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Cari di sistem...">
-    </div>
+        <input type="text" name="q"
+               value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
+               placeholder="Cari pelanggan, paket, teknisi..."
+               autocomplete="off">
+    </form>
 
     <!-- Right side -->
     <div class="navbar-right">
