@@ -26,13 +26,7 @@ if (isset($conn)) {
     <!-- Right side -->
     <div class="navbar-right">
 
-        <!-- Notifikasi billing belum lunas -->
-        <div class="navbar-notif" title="<?= $notif_count ?> tagihan belum lunas">
-            🔔
-            <?php if ($notif_count > 0): ?>
-            <span class="notif-badge"><?= $notif_count > 99 ? '99+' : $notif_count ?></span>
-            <?php endif; ?>
-        </div>
+
 
         <!-- User -->
         <div class="navbar-user">
