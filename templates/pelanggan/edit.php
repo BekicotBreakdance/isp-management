@@ -76,6 +76,13 @@ include __DIR__ . '/../layouts/navbar.php';
                             <?php endwhile; ?>
                         </select>
                     </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Status <span style="color:var(--red)">*</span></label>
+                        <select name="status" class="form-select" required>
+                            <option value="Aktif" <?= ($data['status'] ?? 'Aktif') === 'Aktif' ? 'selected' : '' ?>>Aktif</option>
+                            <option value="Nonaktif" <?= ($data['status'] ?? 'Aktif') === 'Nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn-submit">💾 Simpan Perubahan</button>

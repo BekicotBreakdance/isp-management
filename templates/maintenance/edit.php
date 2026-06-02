@@ -58,7 +58,15 @@ include __DIR__ . '/../layouts/navbar.php';
                         <input type="date" name="tanggal_mt" class="form-control"
                                value="<?= htmlspecialchars($data['tanggal_mt']) ?>" required>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
+                        <label class="form-label">Status <span style="color:var(--red)">*</span></label>
+                        <select name="status" class="form-select" required>
+                            <option value="Proses"  <?= ($data['status'] ?? 'Proses') === 'Proses'  ? 'selected' : '' ?>>Proses</option>
+                            <option value="Pending" <?= ($data['status'] ?? 'Proses') === 'Pending' ? 'selected' : '' ?>>Pending</option>
+                            <option value="Selesai" <?= ($data['status'] ?? 'Proses') === 'Selesai' ? 'selected' : '' ?>>Selesai</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
                         <label class="form-label">Detail Kendala</label>
                         <textarea name="detail_kendala_singkat" class="form-control" required><?= htmlspecialchars($data['detail_kendala_singkat']) ?></textarea>
                     </div>

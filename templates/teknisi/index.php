@@ -7,13 +7,13 @@ include __DIR__ . '/../layouts/navbar.php';
 $result = mysqli_query($conn, "SELECT * FROM teknisi ORDER BY id_teknisi ASC");
 $pesan  = $_GET['pesan'] ?? '';
 $notif  = [
-    'tambah_berhasil' => ['teks' => '✅ Teknisi berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan teknisi.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Teknisi berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui teknisi.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Teknisi berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus teknisi.',      'class' => 'notif-error'],
-    'hapus_gagal_relasi' => ['teks' => '⚠️ Teknisi tidak bisa dihapus karena masih memiliki riwayat maintenance.', 'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Teknisi berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan teknisi.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Teknisi berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui teknisi.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Teknisi berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus teknisi.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => 'Teknisi tidak bisa dihapus karena masih memiliki riwayat maintenance.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

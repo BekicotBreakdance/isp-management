@@ -11,10 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenis_ip           = mysqli_real_escape_string($conn, $_POST['jenis_ip']);
     $username_mikrotik  = mysqli_real_escape_string($conn, $_POST['username_mikrotik']);
     $id_pelanggan       = (int)$_POST['id_pelanggan'];
+    $status             = mysqli_real_escape_string($conn, $_POST['status'] ?? 'Aktif');
 
     // Buat query INSERT
-    $query = "INSERT INTO queue (ip_address, jenis_ip, username_mikrotik, id_pelanggan)
-              VALUES ('$ip_address', '$jenis_ip', '$username_mikrotik', $id_pelanggan)";
+    $query = "INSERT INTO queue (ip_address, jenis_ip, username_mikrotik, id_pelanggan, status)
+              VALUES ('$ip_address', '$jenis_ip', '$username_mikrotik', $id_pelanggan, '$status')";
 
     // Jalankan query
     $hasil = mysqli_query($conn, $query);

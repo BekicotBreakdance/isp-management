@@ -8,13 +8,13 @@ $result = mysqli_query($conn, "SELECT * FROM router ORDER BY id_router ASC");
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil' => ['teks' => '✅ Router berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan router.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Router berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui router.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Router berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus router.',      'class' => 'notif-error'],
-    'hapus_gagal_relasi' => ['teks' => '⚠️ Router tidak bisa dihapus karena masih terpasang pada pelanggan aktif.', 'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Router berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan router.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Router berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui router.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Router berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus router.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => 'Router tidak bisa dihapus karena masih terpasang pada pelanggan aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

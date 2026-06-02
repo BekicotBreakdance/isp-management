@@ -8,13 +8,13 @@ $result = mysqli_query($conn, "SELECT * FROM modem ORDER BY id_modem ASC");
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil' => ['teks' => '✅ Modem berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan modem.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Modem berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui modem.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Modem berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus modem.',      'class' => 'notif-error'],
-    'hapus_gagal_relasi' => ['teks' => '⚠️ Modem tidak bisa dihapus karena masih terpasang pada pelanggan aktif.', 'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Modem berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan modem.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Modem berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui modem.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Modem berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus modem.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => 'Modem tidak bisa dihapus karena masih terpasang pada pelanggan aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

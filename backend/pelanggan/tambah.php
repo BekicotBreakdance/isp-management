@@ -12,10 +12,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_modem   = !empty($_POST['id_modem'])  ? (int)$_POST['id_modem']  : 'NULL';
     $id_router  = !empty($_POST['id_router']) ? (int)$_POST['id_router'] : 'NULL';
     $id_paket   = (int)$_POST['id_paket'];
+    $status     = mysqli_real_escape_string($conn, $_POST['status'] ?? 'Aktif');
 
     // Buat query INSERT
-    $query = "INSERT INTO pelanggan (nama, alamat, id_modem, id_router, id_paket)
-              VALUES ('$nama', '$alamat', $id_modem, $id_router, $id_paket)";
+    $query = "INSERT INTO pelanggan (nama, alamat, id_modem, id_router, id_paket, status)
+              VALUES ('$nama', '$alamat', $id_modem, $id_router, $id_paket, '$status')";
 
     // Jalankan query
     $hasil = mysqli_query($conn, $query);

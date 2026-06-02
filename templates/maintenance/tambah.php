@@ -45,7 +45,15 @@ $teknisi_list   = mysqli_query($conn, "SELECT id_teknisi, nama FROM teknisi ORDE
                         <input type="date" name="tanggal_mt" class="form-control"
                                value="<?= date('Y-m-d') ?>" required>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
+                        <label class="form-label">Status <span style="color:var(--red)">*</span></label>
+                        <select name="status" class="form-select" required>
+                            <option value="Proses">Proses</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12">
                         <label class="form-label">Detail Kendala</label>
                         <textarea name="detail_kendala_singkat" class="form-control"
                                   placeholder="Jelaskan kendala yang dialami pelanggan..." required></textarea>

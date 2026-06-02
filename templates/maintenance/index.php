@@ -5,7 +5,7 @@ include __DIR__ . '/../layouts/sidebar.php';
 include __DIR__ . '/../layouts/navbar.php';
 
 $result = mysqli_query($conn, "
-    SELECT m.id_mt, m.tanggal_mt, m.detail_kendala_singkat,
+    SELECT m.id_mt, m.tanggal_mt, m.detail_kendala_singkat, m.status,
            p.nama AS nama_pelanggan,
            t.nama AS nama_teknisi
     FROM maintenance m
@@ -16,12 +16,12 @@ $result = mysqli_query($conn, "
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil' => ['teks' => '✅ Maintenance berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan maintenance.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Maintenance berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui maintenance.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Maintenance berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus maintenance.',      'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Maintenance berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan maintenance.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Maintenance berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui maintenance.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Maintenance berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus maintenance.',      'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">
@@ -49,6 +49,7 @@ $notif = [
                     <th>Pelanggan</th>
                     <th>Teknisi</th>
                     <th>Kendala</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -64,6 +65,19 @@ $notif = [
                         <?= htmlspecialchars($row['detail_kendala_singkat']) ?>
                     </td>
                     <td>
+                        <?php
+                        $mBadge = match($row['status'] ?? 'Proses') {
+                            'Proses'  => 'status-proses',
+                            'Pending' => 'badge-yellow',
+                            'Selesai' => 'badge-green',
+                            default   => 'badge-gray',
+                        };
+                        ?>
+                        <span class="<?= str_starts_with($mBadge, 'status-') ? 'status-pill ' : 'badge ' ?><?= $mBadge ?>">
+                            <?= htmlspecialchars($row['status'] ?? 'Proses') ?>
+                        </span>
+                    </td>
+                    <td>
                         <div style="display:flex;gap:6px">
                             <a href="detail.php?id=<?= $row['id_mt'] ?>" class="btn-action" title="Detail Alat"
                                style="background:#eff6ff;color:var(--blue-mid)">🔍</a>
@@ -76,7 +90,7 @@ $notif = [
                 </tr>
                 <?php endwhile; ?>
             <?php else: ?>
-                <tr><td colspan="6" class="empty-state">Belum ada data maintenance.</td></tr>
+                <tr><td colspan="7" class="empty-state">Belum ada data maintenance.</td></tr>
             <?php endif; ?>
             </tbody>
         </table>

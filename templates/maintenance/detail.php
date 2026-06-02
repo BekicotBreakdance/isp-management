@@ -26,10 +26,10 @@ $alat_res = mysqli_query($conn, "SELECT id_alat, nama_alat FROM alat_mt ORDER BY
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'alat_ditambahkan' => ['teks' => '✅ Alat berhasil ditambahkan!',  'class' => 'notif-success'],
-    'alat_gagal'       => ['teks' => '❌ Gagal menambahkan alat.',     'class' => 'notif-error'],
-    'alat_dihapus'     => ['teks' => '✅ Alat berhasil dihapus!',     'class' => 'notif-success'],
-    'alat_hapus_gagal' => ['teks' => '❌ Gagal menghapus alat.',       'class' => 'notif-error'],
+    'alat_ditambahkan' => ['teks' => 'Alat berhasil ditambahkan!',  'class' => 'notif-success'],
+    'alat_gagal'       => ['teks' => 'Gagal menambahkan alat.',     'class' => 'notif-error'],
+    'alat_dihapus'     => ['teks' => 'Alat berhasil dihapus!',     'class' => 'notif-success'],
+    'alat_hapus_gagal' => ['teks' => 'Gagal menghapus alat.',       'class' => 'notif-error'],
 ];
 
 include __DIR__ . '/../layouts/header.php';

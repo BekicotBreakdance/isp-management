@@ -12,13 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_pelanggan          = (int)$_POST['id_pelanggan'];
     $tanggal_mt            = mysqli_real_escape_string($conn, $_POST['tanggal_mt']);
     $detail_kendala_singkat = mysqli_real_escape_string($conn, $_POST['detail_kendala_singkat']);
+    $status                 = mysqli_real_escape_string($conn, $_POST['status'] ?? 'Proses');
 
     // Buat query UPDATE
     $query = "UPDATE maintenance
               SET id_teknisi             = $id_teknisi,
                   id_pelanggan           = $id_pelanggan,
                   tanggal_mt             = '$tanggal_mt',
-                  detail_kendala_singkat = '$detail_kendala_singkat'
+                  detail_kendala_singkat = '$detail_kendala_singkat',
+                  status                 = '$status'
               WHERE id_mt = $id_mt";
 
     // Jalankan query

@@ -127,7 +127,7 @@
             <p class="sub">Silakan login dengan akun administrator.</p>
 
             <?php if (isset($_GET['pesan']) && $_GET['pesan'] === 'invalid'): ?>
-                <div class="alert-error">❌ Username atau password salah. Coba lagi.</div>
+                <div class="alert-error">Username atau password salah. Coba lagi.</div>
             <?php endif; ?>
 
             <form method="POST" action="/isp-management/backend/auth/login.php">

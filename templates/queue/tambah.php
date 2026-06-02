@@ -49,6 +49,14 @@ $pelanggan_list = mysqli_query($conn, "SELECT id_pelanggan, nama FROM pelanggan 
                             <?php endwhile; ?>
                         </select>
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Status <span style="color:var(--red)">*</span></label>
+                        <select name="status" class="form-select" required>
+                            <option value="Aktif">Aktif</option>
+                            <option value="Suspend">Suspend</option>
+                            <option value="Isolir">Isolir</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="btn-submit">💾 Simpan</button>

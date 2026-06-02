@@ -46,13 +46,13 @@ $result = mysqli_query($conn, "
 // ── Notifikasi pesan ─────────────────────────────────────
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil'   => ['teks' => '✅ Pelanggan berhasil ditambahkan!',                              'class' => 'notif-success'],
-    'tambah_gagal'      => ['teks' => '❌ Gagal menambahkan pelanggan.',                                  'class' => 'notif-error'],
-    'edit_berhasil'     => ['teks' => '✅ Pelanggan berhasil diperbarui!',                               'class' => 'notif-success'],
-    'edit_gagal'        => ['teks' => '❌ Gagal memperbarui pelanggan.',                                  'class' => 'notif-error'],
-    'hapus_berhasil'    => ['teks' => '✅ Pelanggan berhasil dihapus!',                                  'class' => 'notif-success'],
-    'hapus_gagal'       => ['teks' => '❌ Gagal menghapus pelanggan.',                                   'class' => 'notif-error'],
-    'hapus_gagal_relasi'=> ['teks' => '⚠️ Pelanggan tidak bisa dihapus karena masih memiliki data billing, queue, atau maintenance aktif.', 'class' => 'notif-error'],
+    'tambah_berhasil'   => ['teks' => 'Pelanggan berhasil ditambahkan!',                              'class' => 'notif-success'],
+    'tambah_gagal'      => ['teks' => 'Gagal menambahkan pelanggan.',                                  'class' => 'notif-error'],
+    'edit_berhasil'     => ['teks' => 'Pelanggan berhasil diperbarui!',                               'class' => 'notif-success'],
+    'edit_gagal'        => ['teks' => 'Gagal memperbarui pelanggan.',                                  'class' => 'notif-error'],
+    'hapus_berhasil'    => ['teks' => 'Pelanggan berhasil dihapus!',                                  'class' => 'notif-success'],
+    'hapus_gagal'       => ['teks' => 'Gagal menghapus pelanggan.',                                   'class' => 'notif-error'],
+    'hapus_gagal_relasi'=> ['teks' => 'Pelanggan tidak bisa dihapus karena masih memiliki data billing, queue, atau maintenance aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">
@@ -95,7 +95,7 @@ $notif = [
         <table class="dash-table">
             <thead>
                 <tr>
-                    <th>ID</th><th>Nama</th><th>Alamat</th><th>Paket</th><th>Modem</th><th>Router</th><th>Aksi</th>
+                    <th>ID</th><th>Nama</th><th>Alamat</th><th>Paket</th><th>Modem</th><th>Router</th><th>Status</th><th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -116,6 +116,11 @@ $notif = [
                     <td style="font-size:12px"><?= htmlspecialchars($row['merk_modem'] ?? '-') ?></td>
                     <td style="font-size:12px"><?= htmlspecialchars($row['merk_router'] ?? '-') ?></td>
                     <td>
+                        <span class="badge <?= ($row['status'] ?? 'Aktif') === 'Aktif' ? 'badge-green' : 'badge-red' ?>">
+                            <?= htmlspecialchars($row['status'] ?? 'Aktif') ?>
+                        </span>
+                    </td>
+                    <td>
                         <div style="display:flex;gap:6px">
                             <a href="edit.php?id=<?= $row['id_pelanggan'] ?>" class="btn-action btn-edit" title="Edit">✏️</a>
                             <a href="../../backend/pelanggan/hapus.php?id=<?= $row['id_pelanggan'] ?>"
@@ -126,7 +131,7 @@ $notif = [
                 </tr>
                 <?php endwhile; ?>
             <?php else: ?>
-                <tr><td colspan="7" class="empty-state">
+                <tr><td colspan="8" class="empty-state">
                     <?= $cari !== '' ? 'Tidak ada data untuk kata kunci "' . htmlspecialchars($cari) . '".' : 'Belum ada data pelanggan.' ?>
                 </td></tr>
             <?php endif; ?>

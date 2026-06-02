@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_modem     = !empty($_POST['id_modem'])  ? (int)$_POST['id_modem']  : 'NULL';
     $id_router    = !empty($_POST['id_router']) ? (int)$_POST['id_router'] : 'NULL';
     $id_paket     = (int)$_POST['id_paket'];
+    $status       = mysqli_real_escape_string($conn, $_POST['status'] ?? 'Aktif');
 
     // Buat query UPDATE
     $query = "UPDATE pelanggan
@@ -20,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   alamat     = '$alamat',
                   id_modem   = $id_modem,
                   id_router  = $id_router,
-                  id_paket   = $id_paket
+                  id_paket   = $id_paket,
+                  status     = '$status'
               WHERE id_pelanggan = $id_pelanggan";
 
     // Jalankan query

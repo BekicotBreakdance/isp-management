@@ -12,13 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jenis_ip          = mysqli_real_escape_string($conn, $_POST['jenis_ip']);
     $username_mikrotik = mysqli_real_escape_string($conn, $_POST['username_mikrotik']);
     $id_pelanggan      = (int)$_POST['id_pelanggan'];
+    $status            = mysqli_real_escape_string($conn, $_POST['status'] ?? 'Aktif');
 
     // Buat query UPDATE
     $query = "UPDATE queue
               SET ip_address        = '$ip_address',
                   jenis_ip          = '$jenis_ip',
                   username_mikrotik = '$username_mikrotik',
-                  id_pelanggan      = $id_pelanggan
+                  id_pelanggan      = $id_pelanggan,
+                  status            = '$status'
               WHERE id_queue = $id_queue";
 
     // Jalankan query

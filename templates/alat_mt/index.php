@@ -7,13 +7,13 @@ include __DIR__ . '/../layouts/navbar.php';
 $result = mysqli_query($conn, "SELECT * FROM alat_mt ORDER BY id_alat ASC");
 $pesan  = $_GET['pesan'] ?? '';
 $notif  = [
-    'tambah_berhasil' => ['teks' => '✅ Alat berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan alat.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Alat berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui alat.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Alat berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus alat.',      'class' => 'notif-error'],
-    'hapus_gagal_relasi' => ['teks' => '⚠️ Alat tidak bisa dihapus karena masih digunakan di catatan maintenance.', 'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Alat berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan alat.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Alat berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui alat.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Alat berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus alat.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => 'Alat tidak bisa dihapus karena masih digunakan di catatan maintenance.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

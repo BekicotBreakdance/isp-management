@@ -32,12 +32,12 @@ $result = mysqli_query($conn, "
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil' => ['teks' => '✅ Billing berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan billing.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Billing berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui billing.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Billing berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus billing.',      'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Billing berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan billing.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Billing berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui billing.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Billing berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus billing.',      'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">

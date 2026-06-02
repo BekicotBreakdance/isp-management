@@ -14,12 +14,12 @@ $result = mysqli_query($conn, "
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil' => ['teks' => '✅ Queue berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan queue.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Queue berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui queue.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Queue berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus queue.',      'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Queue berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan queue.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Queue berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui queue.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Queue berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus queue.',      'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">
@@ -48,6 +48,7 @@ $notif = [
                     <th>Username Mikrotik</th>
                     <th>Pelanggan</th>
                     <th>Paket</th>
+                    <th>Status</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -62,8 +63,19 @@ $notif = [
                     <td style="font-weight:600"><?= htmlspecialchars($row['nama_pelanggan'] ?? '-') ?></td>
                     <td>
                         <?php if ($row['jenis_paket']): ?>
-                            <span class="badge badge-green"><?= htmlspecialchars($row['jenis_paket']) ?> (<?= $row['kecepatan_bandwidth'] ?> Mbps)</span>
+                            <span class="badge badge-blue"><?= htmlspecialchars($row['jenis_paket']) ?> (<?= $row['kecepatan_bandwidth'] ?> Mbps)</span>
                         <?php else: ?> - <?php endif; ?>
+                    </td>
+                    <td>
+                        <?php
+                        $qBadge = match($row['status'] ?? 'Aktif') {
+                            'Aktif'   => 'badge-green',
+                            'Suspend' => 'badge-yellow',
+                            'Isolir'  => 'badge-red',
+                            default   => 'badge-gray',
+                        };
+                        ?>
+                        <span class="badge <?= $qBadge ?>"><?= htmlspecialchars($row['status'] ?? 'Aktif') ?></span>
                     </td>
                     <td>
                         <div style="display:flex;gap:6px">
@@ -76,7 +88,7 @@ $notif = [
                 </tr>
                 <?php endwhile; ?>
             <?php else: ?>
-                <tr><td colspan="7" class="empty-state">Belum ada data queue.</td></tr>
+                <tr><td colspan="8" class="empty-state">Belum ada data queue.</td></tr>
             <?php endif; ?>
             </tbody>
         </table>

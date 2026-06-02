@@ -8,13 +8,13 @@ $result = mysqli_query($conn, "SELECT * FROM paket ORDER BY harga ASC");
 
 $pesan = $_GET['pesan'] ?? '';
 $notif = [
-    'tambah_berhasil' => ['teks' => '✅ Paket berhasil ditambahkan!', 'class' => 'notif-success'],
-    'tambah_gagal'    => ['teks' => '❌ Gagal menambahkan paket.',    'class' => 'notif-error'],
-    'edit_berhasil'   => ['teks' => '✅ Paket berhasil diperbarui!',  'class' => 'notif-success'],
-    'edit_gagal'      => ['teks' => '❌ Gagal memperbarui paket.',    'class' => 'notif-error'],
-    'hapus_berhasil'  => ['teks' => '✅ Paket berhasil dihapus!',    'class' => 'notif-success'],
-    'hapus_gagal'     => ['teks' => '❌ Gagal menghapus paket.',      'class' => 'notif-error'],
-    'hapus_gagal_relasi' => ['teks' => '⚠️ Paket tidak bisa dihapus karena masih digunakan oleh pelanggan aktif.', 'class' => 'notif-error'],
+    'tambah_berhasil' => ['teks' => 'Paket berhasil ditambahkan!', 'class' => 'notif-success'],
+    'tambah_gagal'    => ['teks' => 'Gagal menambahkan paket.',    'class' => 'notif-error'],
+    'edit_berhasil'   => ['teks' => 'Paket berhasil diperbarui!',  'class' => 'notif-success'],
+    'edit_gagal'      => ['teks' => 'Gagal memperbarui paket.',    'class' => 'notif-error'],
+    'hapus_berhasil'  => ['teks' => 'Paket berhasil dihapus!',    'class' => 'notif-success'],
+    'hapus_gagal'     => ['teks' => 'Gagal menghapus paket.',      'class' => 'notif-error'],
+    'hapus_gagal_relasi' => ['teks' => 'Paket tidak bisa dihapus karena masih digunakan oleh pelanggan aktif.', 'class' => 'notif-error'],
 ];
 ?>
 <div class="main-content">
