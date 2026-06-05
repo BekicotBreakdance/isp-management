@@ -16,11 +16,11 @@ if (isset($conn)) {
 
     <!-- Search global — mengarah ke halaman hasil pencarian -->
     <form class="navbar-search" method="GET" action="/isp-management/templates/search.php">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon"></span>
         <input type="text" name="q"
-               value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
-               placeholder="Cari pelanggan, paket, teknisi..."
-               autocomplete="off">
+            value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
+            placeholder="Cari pelanggan, paket, teknisi..."
+            autocomplete="off">
     </form>
 
     <!-- Right side -->
