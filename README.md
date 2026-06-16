@@ -18,7 +18,6 @@
 | 🪛 **Alat Maintenance** | Inventaris alat teknis |
 | 📦 **Modem** | Data inventaris modem |
 | 🌐 **Router** | Data inventaris router |
-| 🔔 **Notifikasi** | Badge tagihan belum lunas real-time di navbar |
 | 🔍 **Pencarian** | Search pelanggan (nama/alamat), billing (nama + status) |
 
 ---
