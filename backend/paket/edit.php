@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 // Sertakan file koneksi database
 include __DIR__. '/../config/connect.php';

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // ============================================================
 // DASHBOARD — ISP Management System
 // Data diambil dari database MySQL via PHP Native procedural
@@ -231,7 +231,7 @@ $q_billing = mysqli_query($conn, "
                                     </td>
                                     <td>
                                         <div style="display:flex;gap:5px;align-items:center;">
-                                            <a href="/isp-management/templates/pelanggan/index.php?aksi=edit&id=<?= $p['id_pelanggan'] ?>"
+                                            <a href="/isp-management/templates/pelanggan/edit.php?id=<?= $p['id_pelanggan'] ?>"
                                                 class="btn-action btn-edit" title="Edit">✏️</a>
                                             <a href="/isp-management/backend/pelanggan/hapus.php?id=<?= $p['id_pelanggan'] ?>"
                                                 class="btn-action btn-hapus" title="Hapus"
@@ -343,7 +343,7 @@ $q_billing = mysqli_query($conn, "
                                     <div class="paket-price">Rp <?= number_format($pk['harga'], 0, ',', '.') ?>/bln</div>
                                 </div>
                                 <div class="paket-actions">
-                                    <a href="/isp-management/templates/paket/index.php?aksi=edit&id=<?= $pk['id_paket'] ?>"
+                                    <a href="/isp-management/templates/paket/edit.php?id=<?= $pk['id_paket'] ?>"
                                         class="btn-action btn-edit" title="Edit">✏️</a>
                                     <a href="/isp-management/backend/paket/hapus.php?id=<?= $pk['id_paket'] ?>"
                                         class="btn-action btn-hapus" title="Hapus"

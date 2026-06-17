@@ -140,7 +140,7 @@
                 <button type="submit">Masuk →</button>
             </form>
 
-            <div class="login-hint">Default: admin / admin123</div>
+
         </div>
 
     </div>

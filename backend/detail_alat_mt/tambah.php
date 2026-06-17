@@ -1,6 +1,8 @@
-<?php
+﻿<?php
 // Tambah detail alat ke maintenance tertentu
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_mt   = (int)$_POST['id_mt'];

@@ -1,5 +1,7 @@
-<?php
+﻿<?php
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $merk  = mysqli_real_escape_string($conn, $_POST['merk']);

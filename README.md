@@ -1,36 +1,39 @@
 # ISP Management System
 
-> Sistem manajemen jaringan internet berbasis web untuk operator ISP lokal dan RT/RW Net. Dibangun menggunakan **PHP Native** dan **MySQL** dengan tampilan modern berbasis Bootstrap.
+> Sistem manajemen jaringan internet berbasis web untuk operator ISP lokal dan RT/RW Net. Dibangun menggunakan **PHP Native** dan **MySQL** dengan tampilan modern berbasis CSS kustom.
 
 ---
 
 ## Fitur Utama
 
-| Modul | Deskripsi |
-|---|---|
-| 🏠 **Dashboard** | Statistik real-time: total pelanggan, paket, router, estimasi tagihan |
-| 👤 **Pelanggan** | CRUD data pelanggan + relasi ke paket, modem, router |
-| 📶 **Paket Internet** | Kelola paket layanan internet (kecepatan & harga) |
-| 🔀 **Queue / Mikrotik** | Manajemen IP address dan username Mikrotik |
-| 💳 **Billing** | Tagihan bulanan pelanggan + filter status pembayaran |
-| 🔧 **Teknisi** | Data teknisi lapangan |
-| 🛠️ **Maintenance** | Catatan kendala lapangan + alat yang digunakan |
-| 🪛 **Alat Maintenance** | Inventaris alat teknis |
-| 📦 **Modem** | Data inventaris modem |
-| 🌐 **Router** | Data inventaris router |
-| 🔍 **Pencarian** | Search pelanggan (nama/alamat), billing (nama + status) |
+| Modul                   | Deskripsi                                                             |
+| ----------------------- | --------------------------------------------------------------------- |
+| 🏠 **Dashboard**        | Statistik real-time: total pelanggan, paket, router, estimasi tagihan |
+| 👤 **Pelanggan**        | CRUD data pelanggan + relasi ke paket, modem, router                  |
+| 📶 **Paket Internet**   | Kelola paket layanan internet (kecepatan & harga)                     |
+| 🔀 **Queue / Mikrotik** | Manajemen IP address dan username Mikrotik                            |
+| 💳 **Billing**          | Tagihan bulanan pelanggan + filter status pembayaran                  |
+| 🔧 **Teknisi**          | Data teknisi lapangan                                                 |
+| 🛠️ **Maintenance**      | Catatan kendala lapangan + alat yang digunakan                        |
+| 🪛 **Alat Maintenance** | Inventaris alat teknis                                                |
+| 📦 **Modem**            | Data inventaris modem                                                 |
+| 🌐 **Router**           | Data inventaris router                                                |
+| 🔍 **Pencarian**        | Search pelanggan (nama/alamat), billing (nama + status)               |
 
 ---
 
 ## Tech Stack
 
-| Layer | Teknologi |
-|---|---|
-| Backend | PHP Native Procedural |
-| Database | MySQL via XAMPP |
-| Frontend | HTML5, CSS3 (Custom), Bootstrap 5.3 |
-| Font | Google Fonts — Inter |
-| Version Control | Git + GitHub |
+| Layer           | Teknologi                                   |
+| --------------- | ------------------------------------------- |
+| Backend         | PHP Native Procedural                       |
+| Database        | MySQL via XAMPP                             |
+| Frontend        | HTML5, CSS3 (Custom Design System)          |
+| Grid Form       | Bootstrap 5.3 (grid saja — `row` & `col-*`) |
+| Font            | Google Fonts — Inter                        |
+| Version Control | Git + GitHub                                |
+
+> **Catatan**: Tampilan (~90%) dibangun menggunakan CSS kustom (`style.css`). Bootstrap hanya digunakan untuk sistem grid layout pada halaman form.
 
 ---
 
@@ -40,14 +43,19 @@
 isp-management/
 │
 ├── assets/
-│   └── css/
-│       └── style.css          ← Theme utama (CSS Variables)
+│   ├── css/
+│   │   └── style.css          ← Design system utama (CSS Variables & komponen)
+│   ├── images/
+│   └── js/
 │
 ├── backend/
 │   ├── config/
-│   │   └── connect.php        ← Koneksi DB (di-gitignore)
+│   │   ├── connect.php        ← Koneksi DB
+│   │   └── auth_check.php     ← Guard autentikasi session
 │   ├── auth/
-│   ├── pelanggan/
+│   │   ├── login.php          ← Proses login + buat user default
+│   │   └── logout.php         ← Hapus session & redirect
+│   ├── pelanggan/             ← tambah.php, edit.php, hapus.php
 │   ├── paket/
 │   ├── queue/
 │   ├── modem/
@@ -74,10 +82,14 @@ isp-management/
 │   ├── teknisi/
 │   ├── maintenance/
 │   ├── billing/
-│   └── alat_mt/
+│   ├── alat_mt/
+│   └── search.php             ← Pencarian global lintas tabel
 │
 ├── database/
-│   └── isp_management.sql     ← Schema + data awal
+│   └── isp_management.sql     ← Schema + data awal (termasuk user admin)
+│
+├── docs/
+│   └── tabeldatappl.xlsx      ← Dokumentasi tabel data
 │
 ├── .gitignore
 └── index.php                  ← Entry point → redirect ke login
@@ -101,7 +113,7 @@ C:/xampp/htdocs/isp-management/
 
 ### 3. Buat Koneksi Database
 
-Buat file `backend/config/connect.php`:
+Buat file `backend/config/connect.php` (gunakan `connect.example.php` sebagai template):
 
 ```php
 <?php
@@ -156,18 +168,30 @@ maintenance ─┬── pelanggan
              └── detail_alat_mt ── alat_mt
 ```
 
+> Semua relasi menggunakan `ON UPDATE CASCADE`. Penghapusan data induk yang masih dipakai anakan diproteksi di sisi PHP (bukan hanya database) untuk memberikan pesan error yang ramah pengguna.
+
+---
+
+## Keamanan
+
+- Semua halaman backend (`tambah`, `edit`, `hapus`) dilindungi `session_start()` + `auth_check.php`
+- Input teks diproteksi dengan `mysqli_real_escape_string()`
+- Input numerik diproteksi dengan casting `(int)` untuk mencegah SQL Injection
+- Password login di-hash menggunakan `password_hash()` + diverifikasi dengan `password_verify()`
+- Login menggunakan **Prepared Statement** (`mysqli_prepare`)
+
 ---
 
 ## Tim Pengembang
 
 **Tugas Akhir Semester 2 — Universitas Muria Kudus (UMK)**
 
-| Nama | NIM |
-|---|---|
-| Robit Udin | 202551060 |
+| Nama                    | NIM       |
+| ----------------------- | --------- |
+| Robit Udin              | 202551060 |
 | Muhammad Angling Gading | 202551143 |
-| Dinda Putri Nirmala | 202551056 |
-| Zulfa Khoirun Nada | 202551002 |
+| Dinda Putri Nirmala     | 202551056 |
+| Zulfa Khoirun Nada      | 202551002 |
 
 ---
 
@@ -179,4 +203,4 @@ maintenance ─┬── pelanggan
 
 ---
 
-**Status:** ✅ Selesai — Siap Presentasi
+**Status:** ✅ Selesai

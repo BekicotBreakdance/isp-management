@@ -1,7 +1,9 @@
-<?php
+﻿<?php
 
 // Sertakan file koneksi database
+session_start();
 include __DIR__ . '/../config/connect.php';
+include __DIR__ . '/../config/auth_check.php';
 
 // Cek apakah request method adalah POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
