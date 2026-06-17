@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // ============================================================
 // DASHBOARD — ISP Management System
 // Data diambil dari database MySQL via PHP Native procedural
@@ -472,7 +472,7 @@ $q_billing = mysqli_query($conn, "
 <!-- END MAIN CONTENT -->
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
